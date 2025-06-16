@@ -1,6 +1,8 @@
 import os
 import hashlib
 import requests
+from dotenv import load_dotenv
+load_dotenv()
 from alibabacloud_bailian20231229.client import Client
 from alibabacloud_tea_openapi import models as open_api_models
 from alibabacloud_bailian20231229.models import ApplyFileUploadLeaseRequest, AddFileRequest
@@ -64,7 +66,7 @@ if __name__ == "__main__":
                 size_in_bytes=str(file_size)
             )
             
-            lease_response = client.apply_file_upload_lease(workspace_id=workspace_id, category_id=category_id, request=lease_request)
+            lease_response = client.apply_file_upload_lease(workspace_id=str(workspace_id), category_id=str(category_id), request=lease_request)
             
             if lease_response.body.success:
                 # Get the lease ID and upload information
